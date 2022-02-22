@@ -1,4 +1,4 @@
-import { jsxPlugins } from '@innet/jsx'
+import { jsxPlugins } from '.'
 import { nullish, object, stop } from '@innet/utils'
 import innet, { createHandler } from 'innet'
 
