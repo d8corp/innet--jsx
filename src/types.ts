@@ -1,5 +1,5 @@
-export type Props = Record<string, any>
-export type Children = any[]
+export type Props = Record<string, any> | void
+export type Children = any[] | void
 export type RequiredKeys<T> = Exclude<{ [K in keyof T]-?: T extends { [K1 in K]: any } ? K : never}[keyof T], symbol>
 export type GetProps<
   T,
