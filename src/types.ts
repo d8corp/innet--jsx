@@ -10,3 +10,8 @@ export type GetProps<
 ) & (
   Partial<Pick<T, O>> | Partial<Record<`get:${O}`, T[O]>>
 )
+export interface JSXElement <E = any, P extends Props = Props, C extends Children = Children> {
+  type: E
+  props?: P
+  children?: C
+}

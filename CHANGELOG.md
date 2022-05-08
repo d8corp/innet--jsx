@@ -2,6 +2,9 @@
 
 ## v0.1
 
+### v0.1.3 [![08.05.2022](https://img.shields.io/date/1652007502)](https://github.com/d8corp/watch-state/tree/v0.1.3)
+- improve types
+
 ### v0.1.2 [![08.05.2022](https://img.shields.io/date/1652006767)](https://github.com/d8corp/watch-state/tree/v0.1.2)
 - improve types
 
