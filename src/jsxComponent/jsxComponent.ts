@@ -13,6 +13,9 @@ let _handler: Handler
 export function useHandler (): Handler {
   return _handler
 }
+export function setHandler (handler: Handler) {
+  _handler = handler
+}
 
 export function jsxComponent (): PluginHandler {
   return (app: JsxTemplateElement, next, handler) => {

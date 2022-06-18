@@ -6,4 +6,5 @@ export interface JsxComponent<P extends Props = Props, C extends Children = Chil
     (props: P, children: C): any;
 }
 export declare function useHandler(): Handler;
+export declare function setHandler(handler: Handler): void;
 export declare function jsxComponent(): PluginHandler;

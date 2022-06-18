@@ -1,6 +1,6 @@
 {
   "name": "@innet/jsx",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "XML-ish syntax with innet",
   "main": "index.js",
   "module": "index.es6.js",
