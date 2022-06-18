@@ -38,7 +38,7 @@ yarn add @innet/jsx
 ```
 
 ## JSX Component
-JSX Component is a function that get props and children arguments
+JSX Component is a function that get `props` argument
 ```typescript
 function Test (props) {
   return props?.id

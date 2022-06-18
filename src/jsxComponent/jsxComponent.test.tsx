@@ -1,7 +1,7 @@
 import { nullish, object, stop } from '@innet/utils'
 import innet, { createHandler } from 'innet'
 
-import { jsxComponent } from '.'
+import {jsxComponent, useChildren} from '.'
 
 const handler = createHandler([
   nullish([stop]),
@@ -18,8 +18,8 @@ describe('jsxComponent', () => {
     expect(innet(<Test id={42} />, handler)).toBe(42)
   })
   test('children', () => {
-    function Test (props, children) {
-      return props?.show ? children : null
+    function Test (props) {
+      return props?.show ? useChildren() : null
     }
 
     expect(innet(<Test>{42}</Test>, handler)).toBe(null)

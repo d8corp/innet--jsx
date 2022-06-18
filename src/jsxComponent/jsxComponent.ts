@@ -2,26 +2,41 @@ import innet, { Handler, PluginHandler } from 'innet'
 
 import { Children, JSXElement, Props } from '../types'
 
-export interface JsxTemplateElement <P extends Props = Props, C extends Children = Children> extends JSXElement<JsxComponent<P, C>, P, C> {}
+export interface JsxTemplateElement <P extends Props = Props, C extends Children = Children> extends JSXElement<JsxComponent<P>, P, C> {}
 
-export interface JsxComponent <P extends Props = Props, C extends Children = Children> {
-  (props: P, children: C): any
+type RequiredKeys<T> = { [K in keyof T]-?: ({} extends { [P in K]: T[K] } ? never : K) }[keyof T]
+
+export interface JsxComponent <P extends Props = undefined> {
+  (
+    props: RequiredKeys<P> extends never ? undefined : P,
+    ...rest: any[]
+  ): any
+  (
+    props: P extends undefined ? {} : P,
+    ...rest: any[]
+  ): any
+  (
+    props: {} extends P ? undefined : P,
+    ...rest: any[]
+  ): any
 }
 
 let _handler: Handler
+let _children: Children
 
-export function useHandler (): Handler {
-  return _handler
+export function useHandler <H extends Handler = Handler>(): H {
+  return _handler as H
 }
-export function setHandler (handler: Handler) {
-  _handler = handler
+export function useChildren <C extends Children = Children> (): C {
+  return _children as C
 }
 
 export function jsxComponent (): PluginHandler {
   return (app: JsxTemplateElement, next, handler) => {
     if (typeof app.type === 'function') {
       _handler = handler
-      return innet(app.type(app.props, app.children), handler)
+      _children = app.children
+      return innet(app.type(app.props), handler)
     }
 
     return next()
