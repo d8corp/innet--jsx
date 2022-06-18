@@ -10,25 +10,22 @@ const handler = createHandler([
 
 describe('jsxComponent', () => {
   test('simple', () => {
-    class Test {
-      props: { id?: number }
-
-      init (props) {
-        return props?.id
-      }
+    function Test (props) {
+      return props?.id
     }
 
     expect(innet(<Test />, handler)).toBe(undefined)
     expect(innet(<Test id={42} />, handler)).toBe(42)
   })
   test('children', () => {
-    class Test {
-      init (props, children) {
-        return props?.show ? children : null
-      }
+    function Test (props, children) {
+      return props?.show ? children : null
     }
 
     expect(innet(<Test>{42}</Test>, handler)).toBe(null)
     expect(innet(<Test show>{42}</Test>, handler)).toEqual([42])
+  })
+  test('skip non jsx template', () => {
+    expect(innet(42, handler)).toBe(42)
   })
 })

@@ -1,14 +1,9 @@
 import { Handler, PluginHandler } from 'innet';
-import { Children, Props } from '../types';
+import { Children, JSXElement, Props } from '../types';
+export interface JsxTemplateElement<P extends Props = Props, C extends Children = Children> extends JSXElement<JsxComponent<P, C>, P, C> {
+}
+export interface JsxComponent<P extends Props = Props, C extends Children = Children> {
+    (props: P, children: C): any;
+}
+export declare function useHandler(): Handler;
 export declare function jsxComponent(): PluginHandler;
-export interface Component<P extends Props = Props, C extends Children = Children> {
-    init(props?: P, children?: C, handler?: Handler, ...other: any[]): any;
-}
-export interface ComponentConstructor<P extends Props = Props, C extends Children = Children> {
-    new (props?: Props, children?: Children, handler?: Handler): Component<P, C>;
-}
-declare global {
-    namespace JSX {
-        type ElementClass = Component;
-    }
-}

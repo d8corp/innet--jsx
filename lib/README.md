@@ -15,7 +15,9 @@
 JSX is one of the main features you can use with innet.
 JSX makes possible to use XML-ish syntax in JavaScript.
 
-If you want to use JSX with innet you can check
+If you want to use JSX with [innet](https://www.npmjs.com/package/innet) you can check
+- [@innet/dom](https://www.npmjs.com/package/@innetjs/dom) to use it on client side
+- [@innet/server](https://www.npmjs.com/package/@innetjs/server) to use it on server side
 - [innetjs](https://www.npmjs.com/package/innetjs) if you want to try innet ecosystem
 - [innet-jsx](https://www.npmjs.com/package/innet-jsx) converts `jsx`/`tsx` into `js`/`ts`
 - [rollup-plugin-innet-jsx](https://www.npmjs.com/package/rollup-plugin-innet-jsx) to use it with rollup
@@ -35,27 +37,27 @@ yarn
 yarn add @innet/jsx
 ```
 
-## JSX Template
-JSX Template is a function that get props and children arguments
+## JSX Component
+JSX Component is a function that get props and children arguments
 ```typescript
 function Test (props) {
   return props?.id
 }
 ```
 
-Create a handler to handle JSX Template
+Create a handler to handle JSX Component
 ```typescript
 import innet, { createHandler } from 'innet'
 import { object } from '@innet/utils'
-import { jsxTemplate } from '@innet/jsx'
+import { jsxComponent } from '@innet/jsx'
 
 const handler = createHandler([
   object([
-    jsxTemplate,
+    jsxComponent,
   ]),
 ])
 ```
-Here we say: an object should be handled as `jsxTemplate`
+Here we say: an object should be handled as `jsxComponent`
 
 Then we can use it as wall
 ```typescript jsx
@@ -70,14 +72,14 @@ If you try to use `null`, you can get an error, because of `null` is an object. 
 ```typescript jsx
 import innet, { createHandler } from 'innet'
 import { object, nullish, stop } from '@innet/utils'
-import { jsxTemplate } from '@innet/jsx'
+import { jsxComponent } from '@innet/jsx'
 
 const handler = createHandler([
   nullish([
     stop,
   ]),
   object([
-    jsxTemplate,
+    jsxComponent,
   ]),
 ])
 
@@ -89,19 +91,7 @@ innet(<Test>{null}</Test>, handler)
 // [ null ]
 ```
 
-## jsxComponent
-JSX Component is a class that contains method of `init`
-```typescript
-class Test {
-  init (props, children) {
-    return children
-  }
-}
-```
-
-It works the same as JSX Template, but you can get an instance of the component by `this`
-
-## jsxPlugins
+## JSX Plugin
 
 The las feature of this package is `jsxPlugins`.
 This is a plugin which adds default jsx components by jsx plugins.
