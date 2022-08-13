@@ -2,6 +2,9 @@
 
 ## v1.0
 
+### v1.0.3 [![13.08.2022](https://img.shields.io/date/1660396986)](https://github.com/d8corp/watch-state/tree/v1.0.3)
+- added `useProps`
+
 ### v1.0.2 [![18.06.2022](https://img.shields.io/date/1655557541)](https://github.com/d8corp/watch-state/tree/v1.0.2)
 - added `useChildren`
 - removed `children` argument

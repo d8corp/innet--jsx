@@ -14,5 +14,6 @@ export interface JsxComponent<P extends Props = undefined> {
 }
 export declare function useHandler<H extends Handler = Handler>(): H;
 export declare function useChildren<C extends Children = Children>(): C;
+export declare function useProps<C extends any = any>(): C;
 export declare function jsxComponent(): PluginHandler;
 export {};
