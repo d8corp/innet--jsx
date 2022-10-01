@@ -1,4 +1,5 @@
 import innet, { Handler } from 'innet'
+
 import { JSXPluginElement } from '../jsxPlugins'
 
 export type Fallback = (e: Error) => void

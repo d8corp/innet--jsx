@@ -1,5 +1,11 @@
 # Changelog
 
+## v1.1
+
+### v1.1.0 [![01.10.2022](https://img.shields.io/date/1664624299)](https://github.com/d8corp/watch-state/tree/v1.1.0)
+- added `context` jsx plugin
+- added `slots` and `slot` jsx plugin
+
 ## v1.0
 
 ### v1.0.4 [![14.08.2022](https://img.shields.io/date/1660485587)](https://github.com/d8corp/watch-state/tree/v1.0.4)

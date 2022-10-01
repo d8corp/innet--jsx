@@ -1,9 +1,8 @@
-import innet, { createHandler } from 'innet'
 import { array, arrayAsync, nullish, object, stop } from '@innet/utils'
+import innet, { createHandler } from 'innet'
 
-import { jsxPlugins } from '../jsxPlugins'
 import { jsxComponent } from '../jsxComponent'
-
+import { jsxPlugins } from '../jsxPlugins'
 import { Catch, CatchProps } from '.'
 
 declare global {

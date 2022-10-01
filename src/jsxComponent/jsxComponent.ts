@@ -25,7 +25,7 @@ let _handler: Handler
 let _children: Children
 let _props: any
 
-export function useHandler <H extends Handler = Handler>(): H {
+export function useHandler <H extends Handler = Handler> (): H {
   return _handler as H
 }
 export function useChildren <C extends Children = Children> (): C {

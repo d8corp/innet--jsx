@@ -1,4 +1,5 @@
 import { Handler, Next, PluginHandler } from 'innet'
+
 import { Children, JSXElement, Props } from '../types'
 
 export interface JSXPluginElement <P extends Props = Props, C extends Children = Children> extends JSXElement<string, P, C> {}
