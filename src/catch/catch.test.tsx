@@ -3,15 +3,7 @@ import innet, { createHandler } from 'innet'
 
 import { jsxComponent } from '../jsxComponent'
 import { jsxPlugins } from '../jsxPlugins'
-import { Catch, CatchProps } from '.'
-
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      catch: CatchProps
-    }
-  }
-}
+import { Catch } from '.'
 
 const handler = createHandler([
   nullish([stop]),

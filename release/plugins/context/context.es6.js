@@ -1,4 +1,5 @@
 import innet from 'innet';
+import '../../jsxComponent/index.es6.js';
 import { useHandler } from '../../jsxComponent/jsxComponent.es6.js';
 
 function useContext(context) {

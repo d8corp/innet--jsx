@@ -2,31 +2,31 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-var _tslib = require('../../_virtual/_tslib.js');
 var innet = require('innet');
+require('../../jsxComponent/index.js');
+require('../context/index.js');
+var constants = require('./constants.js');
 var jsxComponent = require('../../jsxComponent/jsxComponent.js');
 var context = require('../context/context.js');
-var constants = require('./constants.js');
 
 function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
 
 var innet__default = /*#__PURE__*/_interopDefaultLegacy(innet);
 
 function getSlots(handler, from) {
-    var _a;
-    var result = {};
+    const result = {};
     if (Array.isArray(from)) {
-        for (var i = 0; i < from.length; i++) {
-            var child = from[i];
+        for (let i = 0; i < from.length; i++) {
+            const child = from[i];
             if (child && typeof child === 'object' && !Array.isArray(child)) {
-                var type = child.type, props = child.props, children = child.children;
+                const { type, props, children } = child;
                 if (typeof type === 'string' && handler[type] === slot) {
-                    var name_1 = (props === null || props === void 0 ? void 0 : props.name) || '';
-                    if (name_1 in result) {
-                        (_a = result[name_1]).push.apply(_a, _tslib.__spreadArray([], _tslib.__read(children), false));
+                    const name = (props === null || props === void 0 ? void 0 : props.name) || '';
+                    if (name in result) {
+                        result[name].push(...children);
                     }
                     else {
-                        result[name_1] = children;
+                        result[name] = children;
                     }
                     continue;
                 }
@@ -44,15 +44,13 @@ function getSlots(handler, from) {
 function useSlots() {
     return getSlots(jsxComponent.useHandler(), jsxComponent.useChildren());
 }
-function slot(_a, handler) {
-    var props = _a.props, children = _a.children;
-    var slots = constants.slotsContext.get(handler);
-    var name = (props === null || props === void 0 ? void 0 : props.name) || '';
+function slot({ props, children }, handler) {
+    const slots = constants.slotsContext.get(handler);
+    const name = (props === null || props === void 0 ? void 0 : props.name) || '';
     return innet__default["default"](name in slots ? slots[name] : children, handler);
 }
-function slots(_a, handler) {
-    var from = _a.props.from, children = _a.children;
-    return innet__default["default"](children, context.createContextHandler(handler, constants.slotsContext, getSlots(handler, from)));
+function slots({ props: { from }, children }, handler) {
+    return innet__default["default"](children, context.createContextHandler(handler, constants.slotsContext, Object.assign(getSlots(handler, from), constants.slotsContext.get(handler))));
 }
 
 exports.getSlots = getSlots;

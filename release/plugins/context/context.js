@@ -3,6 +3,7 @@
 Object.defineProperty(exports, '__esModule', { value: true });
 
 var innet = require('innet');
+require('../../jsxComponent/index.js');
 var jsxComponent = require('../../jsxComponent/jsxComponent.js');
 
 function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
@@ -12,23 +13,21 @@ var innet__default = /*#__PURE__*/_interopDefaultLegacy(innet);
 function useContext(context) {
     return context.get(jsxComponent.useHandler());
 }
-var Context = /** @class */ (function () {
-    function Context(defaultValue, name) {
+class Context {
+    constructor(defaultValue, name) {
         this.defaultValue = defaultValue;
         this.key = Symbol(name);
     }
-    Context.prototype.get = function (handler) {
+    get(handler) {
         return this.key in handler ? handler[this.key] : this.defaultValue;
-    };
-    return Context;
-}());
+    }
+}
 function createContextHandler(handler, context, value) {
-    var childrenHandler = Object.create(handler);
+    const childrenHandler = Object.create(handler);
     childrenHandler[context.key] = value;
     return childrenHandler;
 }
-function context(_a, handler) {
-    var props = _a.props, children = _a.children;
+function context({ props, children }, handler) {
     return innet__default["default"](children, createContextHandler(handler, props.for, props.set));
 }
 

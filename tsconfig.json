@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "baseUrl": ".",
-    "target": "ES5",
+    "target": "ES6",
     "lib": [
       "dom",
       "dom.iterable",
@@ -13,19 +13,15 @@
     "esModuleInterop": true,
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
-    "strict": false,
+    "strict": true,
     "forceConsistentCasingInFileNames": true,
     "module": "ESNext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "declaration": true,
-    "jsx": "preserve",
+    "jsx": "preserve"
   },
   "include": [
     "src"
-  ],
-  "exclude": [
-    "**/*.test.ts",
-    "**/*.test.tsx",
   ]
 }

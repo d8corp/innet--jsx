@@ -8,9 +8,9 @@ function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'defau
 
 var innet__default = /*#__PURE__*/_interopDefaultLegacy(innet);
 
-var _handler;
-var _children;
-var _props;
+let _handler;
+let _children;
+let _props;
 function useHandler() {
     return _handler;
 }
@@ -21,7 +21,7 @@ function useProps() {
     return _props;
 }
 function jsxComponent() {
-    return function (app, next, handler) {
+    return (app, next, handler) => {
         if (typeof app.type === 'function') {
             _handler = handler;
             _children = app.children;

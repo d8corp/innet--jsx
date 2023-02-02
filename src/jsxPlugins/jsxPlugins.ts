@@ -1,14 +1,14 @@
-import { Handler, Next, PluginHandler } from 'innet'
+import { type Handler, type Next, type PluginHandler } from 'innet'
 
-import { Children, JSXElement, Props } from '../types'
+import { type Children, type JSXElement, type Props } from '../types'
 
 export interface JSXPluginElement <P extends Props = Props, C extends Children = Children> extends JSXElement<string, P, C> {}
-export interface JSXPlugin <A extends JSXPluginElement = JSXPluginElement, H extends Handler = Handler> {
-  (app: A, handler: H, next: Next)
+export interface JSXPlugin <A extends JSXPluginElement = JSXPluginElement<any>, H extends Handler = Handler> {
+  (app: A, handler: H, next: Next): any
 }
 
 export function jsxPlugins (plugins: Record<string, JSXPlugin>) {
-  return (handler): PluginHandler => {
+  return (handler: Handler): PluginHandler => {
     Object.assign(handler, plugins)
 
     return (app: JSXPluginElement, next, handler) => {
@@ -23,8 +23,6 @@ export function jsxPlugins (plugins: Record<string, JSXPlugin>) {
 
 declare global {
   namespace JSX {
-    interface IntrinsicElements {
-      [elemName: string]: any
-    }
+    type IntrinsicElements = Record<string, any>
   }
 }

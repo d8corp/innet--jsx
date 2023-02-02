@@ -1,7 +1,7 @@
 import { nullish, object, stop } from '@innet/utils'
 import innet, { createHandler } from 'innet'
 
-import { JSXPlugin, jsxPlugins } from '.'
+import { type JSXPlugin, jsxPlugins } from '.'
 
 describe('jsxPlugins', () => {
   test('example', () => {

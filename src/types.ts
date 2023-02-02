@@ -1,6 +1,6 @@
 export type Props = Record<string, any> | void
 export type Children = any[] | void
-export type RequiredKeys<T> = Exclude<{ [K in keyof T]-?: T extends { [K1 in K]: any } ? K : never}[keyof T], symbol>
+export type RequiredKeys<T> = Exclude<{ [K in keyof T]-?: T extends { [K1 in K]: any } ? K : never }[keyof T], symbol>
 export type GetProps<
   T,
   R extends RequiredKeys<T> = RequiredKeys<T>,
@@ -12,6 +12,6 @@ export type GetProps<
 )
 export interface JSXElement <E = any, P extends Props = Props, C extends Children = Children> {
   type: E
-  props?: P
-  children?: C
+  props: P
+  children: C
 }

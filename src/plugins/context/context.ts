@@ -1,7 +1,7 @@
-import innet, { Handler } from 'innet'
+import innet, { type Handler } from 'innet'
 
 import { useHandler } from '../../jsxComponent'
-import { JSXPluginElement } from '../../jsxPlugins'
+import { type JSXPluginElement } from '../../jsxPlugins'
 
 export interface ContextProps <D = any> {
   for: Context<D>

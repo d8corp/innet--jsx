@@ -1,7 +1,9 @@
 import innet from 'innet';
-import { useChildren, useHandler } from '../../jsxComponent/jsxComponent.es6.js';
-import { createContextHandler } from '../context/context.es6.js';
+import '../../jsxComponent/index.es6.js';
+import '../context/index.es6.js';
 import { slotsContext } from './constants.es6.js';
+import { useHandler, useChildren } from '../../jsxComponent/jsxComponent.es6.js';
+import { createContextHandler } from '../context/context.es6.js';
 
 function getSlots(handler, from) {
     const result = {};
@@ -40,7 +42,7 @@ function slot({ props, children }, handler) {
     return innet(name in slots ? slots[name] : children, handler);
 }
 function slots({ props: { from }, children }, handler) {
-    return innet(children, createContextHandler(handler, slotsContext, getSlots(handler, from)));
+    return innet(children, createContextHandler(handler, slotsContext, Object.assign(getSlots(handler, from), slotsContext.get(handler))));
 }
 
 export { getSlots, slot, slots, useSlots };

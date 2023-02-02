@@ -2,6 +2,10 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
+require('./jsxComponent/index.js');
+require('./jsxPlugins/index.js');
+require('./types.js');
+require('./plugins/index.js');
 var jsxComponent = require('./jsxComponent/jsxComponent.js');
 var jsxPlugins = require('./jsxPlugins/jsxPlugins.js');
 var slots = require('./plugins/slots/slots.js');

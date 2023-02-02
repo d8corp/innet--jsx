@@ -10,7 +10,7 @@ const handler = createHandler([
 
 describe('jsxComponent', () => {
   test('simple', () => {
-    function Test (props) {
+    function Test (props: any) {
       return props?.id
     }
 

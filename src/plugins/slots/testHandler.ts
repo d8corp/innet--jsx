@@ -3,16 +3,7 @@ import { createHandler } from 'innet'
 
 import { jsxComponent } from '../../jsxComponent'
 import { jsxPlugins } from '../../jsxPlugins'
-import { slot, SlotProps, slots, SlotsProps } from '.'
-
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      slot: SlotProps
-      slots: SlotsProps
-    }
-  }
-}
+import { slot, slots } from '.'
 
 export const testHandler = createHandler([
   nullish([stop]),

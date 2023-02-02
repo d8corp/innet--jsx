@@ -1,5 +1,12 @@
 # Changelog
 
+## v1.2
+
+### v1.2.0 [![02.02.2023](https://img.shields.io/date/1675352342)](https://github.com/d8corp/watch-state/tree/v1.2.0)
+
+- update the package building
+- improve `slots`
+
 ## v1.1
 
 ### v1.1.0 [![01.10.2022](https://img.shields.io/date/1664624299)](https://github.com/d8corp/watch-state/tree/v1.1.0)

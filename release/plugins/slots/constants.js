@@ -2,8 +2,9 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
+require('../context/index.js');
 var context = require('../context/context.js');
 
-var slotsContext = new context.Context({});
+const slotsContext = new context.Context({});
 
 exports.slotsContext = slotsContext;

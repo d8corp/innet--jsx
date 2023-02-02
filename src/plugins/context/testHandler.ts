@@ -3,15 +3,7 @@ import { createHandler } from 'innet'
 
 import { jsxComponent } from '../../jsxComponent'
 import { jsxPlugins } from '../../jsxPlugins'
-import { context as contextPlugin, ContextProps } from './context'
-
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      context: ContextProps
-    }
-  }
-}
+import { context as contextPlugin } from './context'
 
 export const testHandler = createHandler([
   nullish([stop]),

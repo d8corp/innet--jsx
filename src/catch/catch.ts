@@ -1,11 +1,11 @@
-import innet, { Handler } from 'innet'
+import innet, { type Handler } from 'innet'
 
-import { JSXPluginElement } from '../jsxPlugins'
+import { type JSXPluginElement } from '../jsxPlugins'
 
 export type Fallback = (e: Error) => void
 
 export interface CatchProps {
-  fallback?: Fallback
+  fallback: Fallback
 }
 
 export function Catch ({ children, type, props }: JSXPluginElement<CatchProps>, handler: Handler) {
@@ -18,7 +18,7 @@ export function Catch ({ children, type, props }: JSXPluginElement<CatchProps>, 
       result = result.catch(props.fallback)
     }
   } catch (e) {
-    result = props?.fallback(e)
+    result = props?.fallback(e as Error)
   }
 
   return result
