@@ -42,7 +42,7 @@ function slot({ props, children }, handler) {
     return innet(name in slots ? slots[name] : children, handler);
 }
 function slots({ props: { from }, children }, handler) {
-    return innet(children, createContextHandler(handler, slotsContext, Object.assign(getSlots(handler, from), slotsContext.get(handler))));
+    return innet(children, createContextHandler(handler, slotsContext, Object.assign({}, slotsContext.get(handler), getSlots(handler, from))));
 }
 
 export { getSlots, slot, slots, useSlots };

@@ -2,6 +2,10 @@
 
 ## v1.2
 
+### v1.2.1 [![04.02.2023](https://img.shields.io/date/1675515185)](https://github.com/d8corp/watch-state/tree/v1.2.1)
+
+- fix `slots` bug
+
 ### v1.2.0 [![02.02.2023](https://img.shields.io/date/1675352342)](https://github.com/d8corp/watch-state/tree/v1.2.0)
 
 - update the package building

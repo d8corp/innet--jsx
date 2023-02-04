@@ -60,7 +60,8 @@ export function slot ({ props, children }: JSXPluginElement<SlotProps>, handler:
 
 export function slots ({ props: { from }, children }: JSXPluginElement<SlotsProps>, handler: Handler) {
   return innet(children, createContextHandler(handler, slotsContext, Object.assign(
-    getSlots(handler, from),
+    {},
     slotsContext.get(handler),
+    getSlots(handler, from),
   )))
 }

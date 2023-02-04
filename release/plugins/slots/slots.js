@@ -50,7 +50,7 @@ function slot({ props, children }, handler) {
     return innet__default["default"](name in slots ? slots[name] : children, handler);
 }
 function slots({ props: { from }, children }, handler) {
-    return innet__default["default"](children, context.createContextHandler(handler, constants.slotsContext, Object.assign(getSlots(handler, from), constants.slotsContext.get(handler))));
+    return innet__default["default"](children, context.createContextHandler(handler, constants.slotsContext, Object.assign({}, constants.slotsContext.get(handler), getSlots(handler, from))));
 }
 
 exports.getSlots = getSlots;
