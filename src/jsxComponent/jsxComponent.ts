@@ -1,4 +1,4 @@
-import innet, { type Handler, type PluginHandler } from 'innet'
+import innet, { type HandlerPlugin, NEXT, useApp, useHandler } from 'innet'
 
 import { type Children, type JSXElement, type Props } from '../types'
 
@@ -21,29 +21,12 @@ export interface JsxComponent <P extends Props = undefined> {
   ): any
 }
 
-let _handler: Handler
-let _children: Children
-let _props: any
+export function jsxComponent (): HandlerPlugin {
+  return () => {
+    const app = useApp<JsxTemplateElement>()
 
-export function useHandler <H extends Handler = Handler> (): H {
-  return _handler as H
-}
-export function useChildren <C extends Children = Children> (): C {
-  return _children as C
-}
-export function useProps <C extends object | undefined = any> (): C {
-  return _props
-}
+    if (typeof app.type !== 'function') return NEXT
 
-export function jsxComponent (): PluginHandler {
-  return (app: JsxTemplateElement, next, handler) => {
-    if (typeof app.type === 'function') {
-      _handler = handler
-      _children = app.children
-      _props = app.props
-      return innet(app.type(_props), handler)
-    }
-
-    return next()
+    innet(app.type(app.props), useHandler())
   }
 }

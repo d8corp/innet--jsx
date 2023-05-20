@@ -1,31 +1,49 @@
-import { nullish, object, stop } from '@innet/utils'
+import { nullish, object } from '@innet/utils'
 import innet, { createHandler } from 'innet'
 
-import { jsxComponent, useChildren } from '.'
+import { useChildren } from '..'
+import { jsxComponent } from '.'
 
 const handler = createHandler([
-  nullish([stop]),
-  object([jsxComponent]),
+  nullish([]),
+  object([
+    jsxComponent,
+  ]),
 ])
 
 describe('jsxComponent', () => {
   test('simple', () => {
+    const log = jest.fn()
+
     function Test (props: any) {
-      return props?.id
+      log(props?.id)
     }
 
-    expect(innet(<Test />, handler)).toBe(undefined)
-    expect(innet(<Test id={42} />, handler)).toBe(42)
+    innet(<Test />, handler)
+
+    expect(log).toBeCalledTimes(1)
+    expect(log).toBeCalledWith(undefined)
+
+    innet(<Test id={42} />, handler)
+
+    expect(log).toBeCalledTimes(2)
+    expect(log).toBeCalledWith(42)
   })
   test('children', () => {
+    const log = jest.fn()
+
     function Test (props: any) {
-      return props?.show ? useChildren() : null
+      log(props?.show ? useChildren() : null)
     }
 
-    expect(innet(<Test>{42}</Test>, handler)).toBe(null)
-    expect(innet(<Test show>{42}</Test>, handler)).toEqual([42])
-  })
-  test('skip non jsx template', () => {
-    expect(innet(42, handler)).toBe(42)
+    innet(<Test>{42}</Test>, handler)
+
+    expect(log).toBeCalledTimes(1)
+    expect(log).toBeCalledWith(null)
+
+    innet(<Test show>{42}</Test>, handler)
+
+    expect(log).toBeCalledTimes(2)
+    expect(log).toBeCalledWith([42])
   })
 })

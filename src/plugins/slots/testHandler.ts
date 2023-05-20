@@ -1,17 +1,14 @@
-import { array, arrayAsync, arrayClear, arraySingleLess, nullish, object, stop } from '@innet/utils'
-import { createHandler } from 'innet'
+import { arraySync, createConditionPlugin, nullish, object } from '@innet/utils'
+import { createHandler, useApp } from 'innet'
 
 import { jsxComponent } from '../../jsxComponent'
 import { jsxPlugins } from '../../jsxPlugins'
 import { slot, slots } from '.'
 
 export const testHandler = createHandler([
-  nullish([stop]),
-  array([
-    arrayAsync,
-    arrayClear,
-    arraySingleLess,
-  ]),
+  nullish([]),
+  createConditionPlugin(() => useApp() === undefined)([]),
+  arraySync,
   object([
     jsxPlugins({
       slot,

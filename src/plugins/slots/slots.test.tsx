@@ -1,11 +1,17 @@
-import innet from 'innet'
+import innet, { createHandler, useApp } from 'innet'
 
-import { useChildren } from '../../jsxComponent'
+import { useChildren } from '../../hooks'
 import { useSlots } from './slots'
 import { testHandler } from './testHandler'
 
 describe('slots', () => {
   it('should work', () => {
+    const log = jest.fn()
+    const handler = createHandler([
+      () => () => {
+        log(useApp())
+      },
+    ], testHandler)
     function Content () {
       return (
         <slots from={useChildren()}>
@@ -16,7 +22,7 @@ describe('slots', () => {
       )
     }
 
-    const result = innet(
+    innet(
       <Content>
         <slot name='footer'>
           footer
@@ -27,19 +33,23 @@ describe('slots', () => {
         </slot>
         content
       </Content>,
-      testHandler,
+      handler,
     )
 
-    expect(result).toEqual([
-      'header',
-      [
-        'custom',
-        'content',
-      ],
-      'footer',
-    ])
+    expect(log).toBeCalledTimes(4)
+    expect(log).toBeCalledWith('header')
+    expect(log).toBeCalledWith('custom')
+    expect(log).toBeCalledWith('content')
+    expect(log).toBeCalledWith('footer')
   })
   it('should work with default value', () => {
+    const log = jest.fn()
+    const handler = createHandler([
+      () => () => {
+        log(useApp())
+      },
+    ], testHandler)
+
     function Content () {
       return (
         <slots from={useChildren()}>
@@ -56,20 +66,26 @@ describe('slots', () => {
       )
     }
 
-    const result = innet(
+    innet(
       <Content>
         custom content
       </Content>,
-      testHandler,
+      handler,
     )
 
-    expect(result).toEqual([
-      'default header',
-      'custom content',
-      'default footer',
-    ])
+    expect(log).toBeCalledTimes(3)
+    expect(log).toBeCalledWith('default header')
+    expect(log).toBeCalledWith('custom content')
+    expect(log).toBeCalledWith('default footer')
   })
   it('should work with couple same slots', () => {
+    const log = jest.fn()
+    const handler = createHandler([
+      () => () => {
+        log(useApp())
+      },
+    ], testHandler)
+
     function Content () {
       return (
         <slots from={useChildren()}>
@@ -86,7 +102,7 @@ describe('slots', () => {
       )
     }
 
-    const result = innet(
+    innet(
       <Content>
         <slot name='header'>
           first header
@@ -96,39 +112,22 @@ describe('slots', () => {
         </slot>
         custom content
       </Content>,
-      testHandler,
+      handler,
     )
 
-    expect(result).toEqual([
-      ['first header', 'second header'],
-      'custom content',
-      'default footer',
-    ])
+    expect(log).toBeCalledTimes(4)
+    expect(log).toBeCalledWith('first header')
+    expect(log).toBeCalledWith('second header')
+    expect(log).toBeCalledWith('custom content')
+    expect(log).toBeCalledWith('default footer')
   })
   it('should work with getSlots', () => {
+    const log = jest.fn()
     function Content () {
-      const { '': content, header, footer } = useSlots()
-
-      return (
-        <>
-          {header && (
-            <div class='header'>
-              {header}
-            </div>
-          )}
-          <div class='content'>
-            {content}
-          </div>
-          {footer && (
-            <div class='footer'>
-              {footer}
-            </div>
-          )}
-        </>
-      )
+      log(useSlots())
     }
 
-    const result = innet(
+    innet(
       <Content>
         <slot name='header'>
           first header
@@ -141,17 +140,13 @@ describe('slots', () => {
       testHandler,
     )
 
-    expect(result).toEqual([
-      {
-        children: [['first header', 'second header']],
-        props: { class: 'header' },
-        type: 'div',
-      },
-      {
-        children: [['custom content']],
-        props: { class: 'content' },
-        type: 'div',
-      },
-    ])
+    expect(log).toBeCalledTimes(1)
+    expect(log).toBeCalledWith({
+      '': ['custom content'],
+      header: [
+        'first header',
+        'second header',
+      ],
+    })
   })
 })

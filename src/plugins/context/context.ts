@@ -1,7 +1,6 @@
-import innet, { type Handler } from 'innet'
+import innet, { type Handler, useHandler } from 'innet'
 
-import { useHandler } from '../../jsxComponent'
-import { type JSXPluginElement } from '../../jsxPlugins'
+import { useChildren, useProps } from '../../hooks'
 
 export interface ContextProps <D = any> {
   for: Context<D>
@@ -30,6 +29,8 @@ export function createContextHandler <D> (handler: Handler, context: Context<D>,
   return childrenHandler
 }
 
-export function context ({ props, children }: JSXPluginElement<ContextProps>, handler: Handler) {
-  return innet(children, createContextHandler(handler, props.for, props.set))
+export function context () {
+  const props = useProps<ContextProps>()
+
+  innet(useChildren(), createContextHandler(useHandler(), props.for, props.set))
 }

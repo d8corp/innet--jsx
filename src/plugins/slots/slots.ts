@@ -1,7 +1,7 @@
-import innet, { type Handler } from 'innet'
+import innet, { type Handler, useHandler } from 'innet'
 
-import { useChildren, useHandler } from '../../jsxComponent'
-import { type JSXPluginElement } from '../../jsxPlugins'
+import { useChildren, useProps } from '../../hooks'
+import { JSX_PLUGINS } from '../../jsxPlugins'
 import { type Children } from '../../types'
 import { createContextHandler } from '../context'
 import { slotsContext } from './constants'
@@ -24,7 +24,7 @@ export function getSlots (handler: Handler, from: Children): Record<string, any>
       if (child && typeof child === 'object' && !Array.isArray(child)) {
         const { type, props, children } = child
 
-        if (typeof type === 'string' && handler[type] === slot) {
+        if (typeof type === 'string' && handler[JSX_PLUGINS][type] === slot) {
           const name = props?.name || ''
 
           if (name in result) {
@@ -52,14 +52,22 @@ export function useSlots () {
   return getSlots(useHandler(), useChildren())
 }
 
-export function slot ({ props, children }: JSXPluginElement<SlotProps>, handler: Handler) {
+export function slot () {
+  const handler = useHandler()
+  const props = useProps()
+  const children = useChildren()
   const slots = slotsContext.get(handler)
   const name = props?.name || ''
-  return innet(name in slots ? slots[name] : children, handler)
+
+  innet(name in slots ? slots[name] : children, handler)
 }
 
-export function slots ({ props: { from }, children }: JSXPluginElement<SlotsProps>, handler: Handler) {
-  return innet(children, createContextHandler(handler, slotsContext, Object.assign(
+export function slots () {
+  const handler = useHandler()
+  const children = useChildren()
+  const { from } = useProps<SlotsProps>()
+
+  innet(children, createContextHandler(handler, slotsContext, Object.assign(
     {},
     slotsContext.get(handler),
     getSlots(handler, from),

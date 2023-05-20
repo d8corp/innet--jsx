@@ -1,14 +1,16 @@
-import { nullish, object, stop } from '@innet/utils'
-import innet, { createHandler } from 'innet'
+import { nullish, object } from '@innet/utils'
+import innet, { createHandler, type HandlerPlugin } from 'innet'
 
-import { type JSXPlugin, jsxPlugins } from '.'
+import { useChildren } from '../hooks'
+import { jsxPlugins } from '.'
 
 describe('jsxPlugins', () => {
   test('example', () => {
-    const test: JSXPlugin = ({ children }) => children
+    const log = jest.fn()
+    const test: HandlerPlugin = () => log(useChildren())
 
     const handler = createHandler([
-      nullish([stop]),
+      nullish([]),
       object([
         jsxPlugins({
           test,
@@ -16,6 +18,9 @@ describe('jsxPlugins', () => {
       ]),
     ])
 
-    expect(innet(<test>{null}</test>, handler)).toEqual([null])
+    innet(<test>{null}</test>, handler)
+
+    expect(log).toBeCalledTimes(1)
+    expect(log).toBeCalledWith([null])
   })
 })

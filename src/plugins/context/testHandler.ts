@@ -1,20 +1,16 @@
-import { array, arrayAsync, arrayClear, arraySingleLess, nullish, object, stop } from '@innet/utils'
+import { arraySync, nullish, object } from '@innet/utils'
 import { createHandler } from 'innet'
 
 import { jsxComponent } from '../../jsxComponent'
 import { jsxPlugins } from '../../jsxPlugins'
-import { context as contextPlugin } from './context'
+import { context } from './context'
 
 export const testHandler = createHandler([
-  nullish([stop]),
-  array([
-    arrayAsync,
-    arrayClear,
-    arraySingleLess,
-  ]),
+  nullish([]),
+  arraySync,
   object([
     jsxPlugins({
-      context: contextPlugin,
+      context,
     }),
     jsxComponent,
   ]),
