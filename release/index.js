@@ -6,18 +6,19 @@ require('./jsxComponent/index.js');
 require('./jsxPlugins/index.js');
 require('./types.js');
 require('./plugins/index.js');
+require('./hooks/index.js');
 var jsxComponent = require('./jsxComponent/jsxComponent.js');
 var jsxPlugins = require('./jsxPlugins/jsxPlugins.js');
 var slots = require('./plugins/slots/slots.js');
 var constants = require('./plugins/slots/constants.js');
 var context = require('./plugins/context/context.js');
+var useChildren = require('./hooks/useChildren/useChildren.js');
+var useProps = require('./hooks/useProps/useProps.js');
 
 
 
 exports.jsxComponent = jsxComponent.jsxComponent;
-exports.useChildren = jsxComponent.useChildren;
-exports.useHandler = jsxComponent.useHandler;
-exports.useProps = jsxComponent.useProps;
+exports.JSX_PLUGINS = jsxPlugins.JSX_PLUGINS;
 exports.jsxPlugins = jsxPlugins.jsxPlugins;
 exports.getSlots = slots.getSlots;
 exports.slot = slots.slot;
@@ -28,3 +29,5 @@ exports.Context = context.Context;
 exports.context = context.context;
 exports.createContextHandler = context.createContextHandler;
 exports.useContext = context.useContext;
+exports.useChildren = useChildren.useChildren;
+exports.useProps = useProps.useProps;

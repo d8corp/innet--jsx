@@ -7,6 +7,3 @@ var jsxComponent = require('./jsxComponent.js');
 
 
 exports.jsxComponent = jsxComponent.jsxComponent;
-exports.useChildren = jsxComponent.useChildren;
-exports.useHandler = jsxComponent.useHandler;
-exports.useProps = jsxComponent.useProps;

@@ -1,13 +1,19 @@
+import { useApp, NEXT, useHandler } from 'innet';
+
+const JSX_PLUGINS = Symbol('JSX_PLUGINS');
 function jsxPlugins(plugins) {
-    return (handler) => {
-        Object.assign(handler, plugins);
-        return (app, next, handler) => {
-            if (typeof app.type === 'string' && typeof handler[app.type] === 'function') {
-                return handler[app.type](app, handler, next);
-            }
-            return next();
+    return handler => {
+        handler[JSX_PLUGINS] = plugins;
+        return () => {
+            const app = useApp();
+            if (typeof app.type !== 'string')
+                return NEXT;
+            const jsxPlugin = useHandler()[JSX_PLUGINS][app.type];
+            if (typeof jsxPlugin !== 'function')
+                return NEXT;
+            return jsxPlugin();
         };
     };
 }
 
-export { jsxPlugins };
+export { JSX_PLUGINS, jsxPlugins };

@@ -2,16 +2,23 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
+var innet = require('innet');
+
+const JSX_PLUGINS = Symbol('JSX_PLUGINS');
 function jsxPlugins(plugins) {
-    return (handler) => {
-        Object.assign(handler, plugins);
-        return (app, next, handler) => {
-            if (typeof app.type === 'string' && typeof handler[app.type] === 'function') {
-                return handler[app.type](app, handler, next);
-            }
-            return next();
+    return handler => {
+        handler[JSX_PLUGINS] = plugins;
+        return () => {
+            const app = innet.useApp();
+            if (typeof app.type !== 'string')
+                return innet.NEXT;
+            const jsxPlugin = innet.useHandler()[JSX_PLUGINS][app.type];
+            if (typeof jsxPlugin !== 'function')
+                return innet.NEXT;
+            return jsxPlugin();
         };
     };
 }
 
+exports.JSX_PLUGINS = JSX_PLUGINS;
 exports.jsxPlugins = jsxPlugins;

@@ -1,6 +1,7 @@
-import innet from 'innet';
-import '../../jsxComponent/index.es6.js';
-import { useHandler } from '../../jsxComponent/jsxComponent.es6.js';
+import innet, { useHandler } from 'innet';
+import '../../hooks/index.es6.js';
+import { useProps } from '../../hooks/useProps/useProps.es6.js';
+import { useChildren } from '../../hooks/useChildren/useChildren.es6.js';
 
 function useContext(context) {
     return context.get(useHandler());
@@ -19,8 +20,9 @@ function createContextHandler(handler, context, value) {
     childrenHandler[context.key] = value;
     return childrenHandler;
 }
-function context({ props, children }, handler) {
-    return innet(children, createContextHandler(handler, props.for, props.set));
+function context() {
+    const props = useProps();
+    innet(useChildren(), createContextHandler(useHandler(), props.for, props.set));
 }
 
 export { Context, context, createContextHandler, useContext };

@@ -8,31 +8,13 @@ function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'defau
 
 var innet__default = /*#__PURE__*/_interopDefaultLegacy(innet);
 
-let _handler;
-let _children;
-let _props;
-function useHandler() {
-    return _handler;
-}
-function useChildren() {
-    return _children;
-}
-function useProps() {
-    return _props;
-}
 function jsxComponent() {
-    return (app, next, handler) => {
-        if (typeof app.type === 'function') {
-            _handler = handler;
-            _children = app.children;
-            _props = app.props;
-            return innet__default["default"](app.type(_props), handler);
-        }
-        return next();
+    return () => {
+        const app = innet.useApp();
+        if (typeof app.type !== 'function')
+            return innet.NEXT;
+        innet__default["default"](app.type(app.props), innet.useHandler());
     };
 }
 
 exports.jsxComponent = jsxComponent;
-exports.useChildren = useChildren;
-exports.useHandler = useHandler;
-exports.useProps = useProps;
