@@ -27,6 +27,13 @@ export function jsxComponent (): HandlerPlugin {
 
     if (typeof app.type !== 'function') return NEXT
 
-    innet(app.type(app.props), useHandler())
+    const handler = useHandler()
+    const result = app.type(app.props)
+
+    if (result && (Symbol.iterator in result || Symbol.asyncIterator in result)) {
+      innet(result.next().value, handler)
+    }
+
+    innet(result, handler)
   }
 }

@@ -13,7 +13,12 @@ function jsxComponent() {
         const app = innet.useApp();
         if (typeof app.type !== 'function')
             return innet.NEXT;
-        innet__default["default"](app.type(app.props), innet.useHandler());
+        const handler = innet.useHandler();
+        const result = app.type(app.props);
+        if (result && (Symbol.iterator in result || Symbol.asyncIterator in result)) {
+            innet__default["default"](result.next().value, handler);
+        }
+        innet__default["default"](result, handler);
     };
 }
 
