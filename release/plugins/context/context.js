@@ -11,18 +11,6 @@ function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'defau
 
 var innet__default = /*#__PURE__*/_interopDefaultLegacy(innet);
 
-function useContext(context) {
-    return context.get(innet.useHandler());
-}
-class Context {
-    constructor(defaultValue, name) {
-        this.defaultValue = defaultValue;
-        this.key = Symbol(name);
-    }
-    get(handler) {
-        return this.key in handler ? handler[this.key] : this.defaultValue;
-    }
-}
 function createContextHandler(handler, context, value) {
     const childrenHandler = Object.create(handler);
     childrenHandler[context.key] = value;
@@ -33,7 +21,5 @@ function context() {
     innet__default["default"](useChildren.useChildren(), createContextHandler(innet.useHandler(), props.for, props.set));
 }
 
-exports.Context = Context;
 exports.context = context;
 exports.createContextHandler = createContextHandler;
-exports.useContext = useContext;

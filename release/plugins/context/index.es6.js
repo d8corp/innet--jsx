@@ -1,1 +1,1 @@
-export { Context, context, createContextHandler, useContext } from './context.es6.js';
+export { context, createContextHandler } from './context.es6.js';

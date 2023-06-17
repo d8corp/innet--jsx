@@ -6,7 +6,5 @@ var context = require('./context.js');
 
 
 
-exports.Context = context.Context;
 exports.context = context.context;
 exports.createContextHandler = context.createContextHandler;
-exports.useContext = context.useContext;

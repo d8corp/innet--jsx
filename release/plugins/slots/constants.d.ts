@@ -1,2 +1,2 @@
-import { Context } from '../context';
+import { Context } from '../../utils';
 export declare const slotsContext: Context<any, {}>;

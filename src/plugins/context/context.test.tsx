@@ -1,6 +1,7 @@
 import innet from 'innet'
 
-import { Context, useContext } from './context'
+import { useContext } from '../../hooks'
+import { Context } from '../../utils'
 import { testHandler } from './testHandler'
 
 describe('context', () => {

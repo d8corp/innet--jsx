@@ -1,5 +1,7 @@
 import innet, { type HandlerPlugin, NEXT, useApp, useHandler } from 'innet'
 
+import { genericAppContext } from '../hooks'
+import { createContextHandler } from '../plugins'
 import { type Children, type JSXElement, type Props } from '../types'
 
 export interface JsxTemplateElement <P extends Props = Props, C extends Children = Children> extends JSXElement<JsxComponent<P>, P, C> {}
@@ -30,8 +32,9 @@ export function jsxComponent (): HandlerPlugin {
     const handler = useHandler()
     const result = app.type(app.props)
 
-    if (result && (Symbol.iterator in result || Symbol.asyncIterator in result)) {
-      innet(result.next().value, handler)
+    if (result && (Symbol.iterator in result || Symbol.asyncIterator in result) && typeof result.next === 'function') {
+      innet(result, createContextHandler(handler, genericAppContext, app))
+      return
     }
 
     innet(result, handler)
