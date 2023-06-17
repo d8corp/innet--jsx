@@ -11,6 +11,6 @@ export { slotsContext } from './plugins/slots/constants.es6.js';
 export { context, createContextHandler } from './plugins/context/context.es6.js';
 export { useChildren } from './hooks/useChildren/useChildren.es6.js';
 export { useProps } from './hooks/useProps/useProps.es6.js';
-export { genericAppContext, useGenericApp } from './hooks/useGenericApp/useGenericApp.es6.js';
 export { useContext } from './hooks/useContext/useContext.es6.js';
 export { Context } from './utils/Context/Context.es6.js';
+export { GenericComponent } from './utils/GenericComponent/GenericComponent.es6.js';
