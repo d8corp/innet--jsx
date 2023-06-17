@@ -17,7 +17,10 @@ function jsxComponent() {
             return innet.NEXT;
         const handler = innet.useHandler();
         const result = app.type(app.props);
-        if (result && (Symbol.iterator in result || Symbol.asyncIterator in result) && typeof result.next === 'function') {
+        if (result &&
+            typeof result === 'object' &&
+            (Symbol.iterator in result || Symbol.asyncIterator in result) &&
+            typeof result.next === 'function') {
             const data = result.next();
             innet__default["default"](new GenericComponent.GenericComponent(data, result), handler);
             return;

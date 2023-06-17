@@ -31,7 +31,12 @@ export function jsxComponent (): HandlerPlugin {
     const handler = useHandler()
     const result = app.type(app.props)
 
-    if (result && (Symbol.iterator in result || Symbol.asyncIterator in result) && typeof result.next === 'function') {
+    if (
+      result &&
+      typeof result === 'object' &&
+      (Symbol.iterator in result || Symbol.asyncIterator in result) &&
+      typeof result.next === 'function'
+    ) {
       const data = result.next()
 
       innet(new GenericComponent(data, result), handler)
