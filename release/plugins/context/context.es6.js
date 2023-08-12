@@ -5,7 +5,7 @@ import { useChildren } from '../../hooks/useChildren/useChildren.es6.js';
 
 function createContextHandler(handler, context, value) {
     const childrenHandler = Object.create(handler);
-    childrenHandler[context.key] = value;
+    context.set(childrenHandler, value);
     return childrenHandler;
 }
 function context() {

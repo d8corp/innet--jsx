@@ -10,7 +10,7 @@ export interface ContextProps <D = any> {
 
 export function createContextHandler <D> (handler: Handler, context: Context<D>, value: D): Handler {
   const childrenHandler = Object.create(handler)
-  childrenHandler[context.key] = value
+  context.set(childrenHandler, value)
   return childrenHandler
 }
 

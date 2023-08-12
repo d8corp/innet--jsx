@@ -10,4 +10,8 @@ export class Context <D = any, Def = D> {
   get (handler: Handler): D | Def {
     return this.key in handler ? handler[this.key] : this.defaultValue
   }
+
+  set (handler: Handler, value: D | Def) {
+    handler[this.key] = value
+  }
 }

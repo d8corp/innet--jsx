@@ -22,7 +22,7 @@ If you want to use JSX with [innet](https://www.npmjs.com/package/innet) you can
 - [innet-jsx](https://www.npmjs.com/package/innet-jsx) converts `jsx`/`tsx` into `js`/`ts`
 - [rollup-plugin-innet-jsx](https://www.npmjs.com/package/rollup-plugin-innet-jsx) to use it with rollup
 
-This package contains plugins that handle jsx components and templates.
+This package contains plugins that handle jsx components.
 
 [![stars](https://img.shields.io/github/stars/d8corp/innet--jsx?style=social)](https://github.com/d8corp/innet--jsx/stargazers)
 [![watchers](https://img.shields.io/github/watchers/d8corp/innet--jsx?style=social)](https://github.com/d8corp/innet--jsx/watchers)
@@ -69,22 +69,21 @@ innet(<Test />, handler)
 ```
 
 If you try to use `null`, you can get an error, because of `null` is an object. To prevent this, use `nullish`
+
 ```typescript jsx
 import innet, { createHandler } from 'innet'
-import { object, nullish, stop } from '@innet/utils'
-import { jsxComponent } from '@innet/jsx'
+import { object, nullish } from '@innet/utils'
+import { jsxComponent, useChildren } from '@innet/jsx'
 
 const handler = createHandler([
-  nullish([
-    stop,
-  ]),
+  nullish([]),
   object([
     jsxComponent,
   ]),
 ])
 
-function Test (props, children) {
-  return children
+function Test () {
+  console.log(useChildren())
 }
 
 innet(<Test>{null}</Test>, handler)
@@ -93,18 +92,21 @@ innet(<Test>{null}</Test>, handler)
 
 ## JSX Plugin
 
-The las feature of this package is `jsxPlugins`.
-This is a plugin which adds default jsx components by jsx plugins.
+`jsxPlugins` is a plugin which adds default jsx elements by jsx plugins.
+
 ```typescript jsx
 import innet, { createHandler } from 'innet'
-import { object, nullish, stop } from '@innet/utils'
-import { jsxPlugins } from '@innet/jsx'
+import { object, nullish } from '@innet/utils'
+import { jsxPlugins, useProps } from '@innet/jsx'
 
 // JSX Plugin
-const sum = ({ a, b }) => a + b
+const sum = () => {
+  const { a, b } = useProps()
+  console.log(a + b)
+}
 
 const handler = createHandler([
-  nullish([stop]),
+  nullish([]),
   object([
     jsxPlugins({
       sum,
@@ -116,9 +118,6 @@ innet(<sum a={1} b={2} />, handler)
 // 3
 ```
 
-JSX Plugin gets app and handler as arguments.
-App is JSX Element which can contain type, props and children fields.
-
 [innet-jsx](https://www.npmjs.com/package/innet-jsx) converts this code to:
 ```typescript
 innet({
@@ -129,9 +128,6 @@ innet({
   }
 }, handler)
 ```
-
-Check [@innet/html](https://www.npmjs.com/package/@innet/html)
-or [@innet/swith](https://www.npmjs.com/package/@innet/swith) as example of JSX Plugin.
 
 ## Issues
 If you find a bug or have a suggestion, please file an issue on [GitHub](https://github.com/d8corp/innet--jsx/issues).

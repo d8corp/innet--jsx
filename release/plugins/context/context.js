@@ -13,7 +13,7 @@ var innet__default = /*#__PURE__*/_interopDefaultLegacy(innet);
 
 function createContextHandler(handler, context, value) {
     const childrenHandler = Object.create(handler);
-    childrenHandler[context.key] = value;
+    context.set(childrenHandler, value);
     return childrenHandler;
 }
 function context() {

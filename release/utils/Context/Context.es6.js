@@ -6,6 +6,9 @@ class Context {
     get(handler) {
         return this.key in handler ? handler[this.key] : this.defaultValue;
     }
+    set(handler, value) {
+        handler[this.key] = value;
+    }
 }
 
 export { Context };
