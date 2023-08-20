@@ -13,6 +13,9 @@ class Context {
     set(handler, value) {
         handler[this.key] = value;
     }
+    reset(handler) {
+        this.set(handler, this.defaultValue);
+    }
 }
 
 exports.Context = Context;

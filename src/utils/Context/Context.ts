@@ -1,9 +1,11 @@
 import { type Handler } from 'innet'
 
-export class Context <D = any, Def = D> {
+export class Context <D = any, Def = D | undefined> {
   readonly key: string
+  readonly defaultValue: Def
 
-  constructor (public readonly defaultValue?: Def, name?: string) {
+  constructor (defaultValue?: Def, name?: string) {
+    this.defaultValue = defaultValue as Def
     this.key = Symbol(name) as unknown as string
   }
 
@@ -13,5 +15,9 @@ export class Context <D = any, Def = D> {
 
   set (handler: Handler, value: D | Def) {
     handler[this.key] = value
+  }
+
+  reset (handler: Handler) {
+    this.set(handler, this.defaultValue)
   }
 }
