@@ -23,9 +23,3 @@ export function jsxPlugins (plugins: Record<string, HandlerPlugin>): Plugin {
     }
   }
 }
-
-declare global {
-  namespace JSX {
-    type IntrinsicElements = Record<string, any>
-  }
-}

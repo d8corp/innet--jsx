@@ -4,8 +4,3 @@ export interface JSXPluginElement<P extends Props = Props, C extends Children = 
 }
 export declare const JSX_PLUGINS: unique symbol;
 export declare function jsxPlugins(plugins: Record<string, HandlerPlugin>): Plugin;
-declare global {
-    namespace JSX {
-        type IntrinsicElements = Record<string, any>;
-    }
-}
