@@ -1,7 +1,7 @@
 import { useApp } from 'innet'
 
-import { type JsxTemplateElement } from '../../jsxComponent'
+import { type JsxComponentElement } from '../../jsxComponent'
 
 export function useProps <C extends object | undefined = any> (): C {
-  return useApp<JsxTemplateElement>().props as C
+  return useApp<JsxComponentElement>().props as C
 }

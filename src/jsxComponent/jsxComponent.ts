@@ -1,35 +1,22 @@
 import innet, { type HandlerPlugin, NEXT, useApp, useHandler } from 'innet'
 
-import { type Children, type JSXElement, type Props } from '../types'
+import { type JSXElement, type Props } from '../types'
 import { GenericComponent } from '../utils'
 
-export interface JsxTemplateElement <P extends Props = Props, C extends Children = Children> extends JSXElement<JsxComponent<P>, P, C> {}
+export type JsxComponent <P extends Props = Props> = (props: P) => any
+export type JsxComponentElement <P extends Props = Props> = JSXElement<JsxComponent<P>, P>
 
-type RequiredKeys<T> = { [K in keyof T]-?: ({} extends { [P in K]: T[K] } ? never : K) }[keyof T]
-
-export interface JsxComponent <P extends Props = undefined> {
-  (
-    props: RequiredKeys<P> extends never ? undefined : P,
-    ...rest: any[]
-  ): any
-  (
-    props: P extends undefined ? {} : P,
-    ...rest: any[]
-  ): any
-  (
-    props: {} extends P ? undefined : P,
-    ...rest: any[]
-  ): any
-}
+export const EMPTY_PROPS = Object.freeze({})
 
 export function jsxComponent (): HandlerPlugin {
   return () => {
-    const app = useApp<JsxTemplateElement>()
+    const app = useApp<JsxComponentElement>()
 
     if (typeof app.type !== 'function') return NEXT
 
     const handler = useHandler()
-    const result = app.type(app.props)
+    const run = 'dev' in app ? app.dev : app.type
+    const result = run(app.props || EMPTY_PROPS)
 
     if (
       result &&

@@ -1,8 +1,7 @@
 import { useApp } from 'innet'
 
-import { type JsxTemplateElement } from '../../jsxComponent'
-import { type Children } from '../../types'
+import { type JsxComponentElement } from '../../jsxComponent'
 
-export function useChildren <C extends Children = Children> (): C {
-  return useApp<JsxTemplateElement>().children as C
+export function useChildren <C = any> (): C {
+  return useApp<JsxComponentElement>().props?.children as C
 }

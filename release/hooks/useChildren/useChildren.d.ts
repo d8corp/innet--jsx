@@ -1,2 +1,1 @@
-import { type Children } from '../../types';
-export declare function useChildren<C extends Children = Children>(): C;
+export declare function useChildren<C = any>(): C;

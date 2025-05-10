@@ -2,13 +2,15 @@ import innet, { useApp, NEXT, useHandler } from 'innet';
 import '../utils/index.es6.js';
 import { GenericComponent } from '../utils/GenericComponent/GenericComponent.es6.js';
 
+const EMPTY_PROPS = Object.freeze({});
 function jsxComponent() {
     return () => {
         const app = useApp();
         if (typeof app.type !== 'function')
             return NEXT;
         const handler = useHandler();
-        const result = app.type(app.props);
+        const run = 'dev' in app ? app.dev : app.type;
+        const result = run(app.props || EMPTY_PROPS);
         if (result &&
             typeof result === 'object' &&
             (Symbol.iterator in result || Symbol.asyncIterator in result) &&
@@ -21,4 +23,4 @@ function jsxComponent() {
     };
 }
 
-export { jsxComponent };
+export { EMPTY_PROPS, jsxComponent };

@@ -12,6 +12,8 @@ function jsxPlugins(plugins) {
             const app = innet.useApp();
             if (typeof app.type !== 'string')
                 return innet.NEXT;
+            if (app.dev)
+                return app.dev();
             const jsxPlugin = innet.useHandler()[JSX_PLUGINS][app.type];
             if (typeof jsxPlugin !== 'function')
                 return innet.NEXT;

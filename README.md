@@ -37,11 +37,58 @@ yarn
 yarn add @innet/jsx
 ```
 
+## TS Setup
+
+#### preserve
+
+Setup with [innet-jsx](https://github.com/d8corp/innet-jsx)
+
+`tsconfig.json`
+```
+{
+  "compilerOptions": {
+    ...
+    "jsx": "preserve"
+  },
+  ...
+}
+```
+
+#### react-jsx
+
+Or setup without [innet-jsx](https://github.com/d8corp/innet-jsx)
+
+```
+{
+  "compilerOptions": {
+    ...
+    "jsx": "react-jsx",
+    "jsxImportSource": "@innet/jsx"
+  },
+  ...
+}
+```
+
+#### react-jsxdev
+
+To get more error details use `react-jsxdev`
+
+```
+{
+  "compilerOptions": {
+    ...
+    "jsx": "react-jsxdev",
+    "jsxImportSource": "@innet/jsx"
+  },
+  ...
+}
+```
+
 ## JSX Component
 JSX Component is a function that get `props` argument
 ```typescript
 function Test (props) {
-  return props?.id
+  console.log(props.id)
 }
 ```
 
@@ -73,7 +120,7 @@ If you try to use `null`, you can get an error, because of `null` is an object. 
 ```typescript jsx
 import innet, { createHandler } from 'innet'
 import { object, nullish } from '@innet/utils'
-import { jsxComponent, useChildren } from '@innet/jsx'
+import { jsxComponent } from '@innet/jsx'
 
 const handler = createHandler([
   nullish([]),
@@ -82,12 +129,12 @@ const handler = createHandler([
   ]),
 ])
 
-function Test () {
-  console.log(useChildren())
+function Test ({ children }) {
+  console.log(children)
 }
 
 innet(<Test>{null}</Test>, handler)
-// [ null ]
+// null
 ```
 
 ## JSX Plugin
@@ -118,7 +165,7 @@ innet(<sum a={1} b={2} />, handler)
 // 3
 ```
 
-[innet-jsx](https://www.npmjs.com/package/innet-jsx) converts this code to:
+[innet-jsx](https://www.npmjs.com/package/innet-jsx) converts jsx:
 ```typescript
 innet({
   type: 'sum',
@@ -127,6 +174,112 @@ innet({
     b: 2,
   }
 }, handler)
+```
+
+## context
+
+This package includes `context` JSX Plugin.
+`context` provides a context into children.
+
+```typescript jsx
+import innet, { createHandler } from 'innet'
+import { object, nullish, arraySync } from '@innet/utils'
+import {
+  jsxPlugins,
+  jsxComponent,
+  context,
+  Context,
+  useProps,
+  useContext
+} from '@innet/jsx'
+
+const handler = createHandler([
+  nullish([]),
+  arraySync,
+  object([
+    jsxComponent,
+    jsxPlugins({
+      context,
+    }),
+  ]),
+])
+
+const color = new Context('blue')
+
+function Content () {
+  const currentColor = useContext(color)
+  console.log(`color: ${currentColor}`)
+}
+
+innet((
+  <>
+    <Content />
+    <context for={color} set='red'>
+      <Content />
+    </context>
+  </>
+), handler)
+
+//color: blue
+//color: red
+```
+
+## slots
+
+This package includes `slots` and `slot` JSX Plugins.
+
+```typescript jsx
+import innet, { createHandler } from 'innet'
+import { object, nullish, arraySync } from '@innet/utils'
+import {
+  jsxPlugins,
+  jsxComponent,
+  slots,
+  slot,
+  useProps
+} from '@innet/jsx'
+
+const handler = createHandler([
+  nullish([]),
+  arraySync,
+  object([
+    jsxComponent,
+    jsxPlugins({
+      slots,
+      slot,
+    }),
+  ]),
+  () => () => {
+    console.log(useApp())
+  }
+])
+
+const Content = (props: any) => (
+  <slots from={props.children}>
+    <slot name='header' />
+    <slot />
+    <slot name='footer' />
+  </slots>
+)
+
+innet(
+  <Content>
+    <slot name='footer'>
+      footer
+    </slot>
+    custom
+    <slot name='header'>
+      header
+    </slot>
+    content
+  </Content>,
+  handler,
+)
+
+// header
+// custom
+// content
+// footer
 ```
 
 ## Issues

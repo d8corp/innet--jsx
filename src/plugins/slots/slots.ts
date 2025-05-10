@@ -1,47 +1,62 @@
 import innet, { type Handler, useHandler } from 'innet'
 
-import { useChildren, useProps } from '../../hooks'
+import { useChildren, useContext, useProps } from '../../hooks'
 import { JSX_PLUGINS } from '../../jsxPlugins'
-import { type Children } from '../../types'
 import { createContextHandler } from '../context'
 import { slotsContext } from './constants'
 
 export interface SlotsProps {
   from: any
+  children: any
 }
 
 export interface SlotProps {
   name?: string
+  children?: any
 }
 
-export function getSlots (handler: Handler, from: Children): Record<string, any> {
+export function getSlots (handler: Handler, from: any): Record<string, any> {
   const result: Record<string, any> = {}
 
-  if (Array.isArray(from)) {
-    for (let i = 0; i < from.length; i++) {
-      const child: any = from[i]
+  if (from === undefined) {
+    return result
+  }
 
-      if (child && typeof child === 'object' && !Array.isArray(child)) {
-        const { type, props, children } = child
+  from = Array.isArray(from) ? from : [from]
 
-        if (typeof type === 'string' && handler[JSX_PLUGINS][type] === slot) {
-          const name = props?.name || ''
+  for (let i = 0; i < from.length; i++) {
+    const child: any = from[i]
 
-          if (name in result) {
+    if (child && typeof child === 'object' && !Array.isArray(child)) {
+      const { type, props } = child
+
+      if (typeof type === 'string' && handler[JSX_PLUGINS][type] === slot) {
+        const name = props?.name || ''
+
+        if (name in result) {
+          const children = props?.children === undefined
+            ? []
+            : Array.isArray(props.children)
+              ? props.children
+              : [props.children]
+
+          if (Array.isArray(result[name])) {
             result[name].push(...children)
           } else {
-            result[name] = children
+            result[name] = [result[name], ...children]
           }
-
-          continue
+        } else {
+          result[name] = props.children
         }
-      }
 
-      if ('' in result) {
-        result[''].push(child)
-      } else {
-        result[''] = [child]
+        continue
       }
+    }
+
+    if ('' in result) {
+      result[''].push(child)
+    } else {
+      result[''] = [child]
     }
   }
 
@@ -56,7 +71,7 @@ export function slot () {
   const handler = useHandler()
   const props = useProps()
   const children = useChildren()
-  const slots = slotsContext.get(handler)
+  const slots = useContext(slotsContext)
   const name = props?.name || ''
 
   innet(name in slots ? slots[name] : children, handler)
@@ -64,8 +79,7 @@ export function slot () {
 
 export function slots () {
   const handler = useHandler()
-  const children = useChildren()
-  const { from } = useProps<SlotsProps>()
+  const { from, children } = useProps<SlotsProps>()
 
   innet(children, createContextHandler(handler, slotsContext, Object.assign(
     {},

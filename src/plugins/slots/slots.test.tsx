@@ -7,11 +7,13 @@ import { testHandler } from './testHandler'
 describe('slots', () => {
   it('should work', () => {
     const log = jest.fn()
+
     const handler = createHandler([
       () => () => {
         log(useApp())
       },
     ], testHandler)
+
     function Content () {
       return (
         <slots from={useChildren()}>
@@ -22,7 +24,7 @@ describe('slots', () => {
       )
     }
 
-    innet(
+    const app = (
       <Content>
         <slot name='footer'>
           footer
@@ -32,9 +34,10 @@ describe('slots', () => {
           header
         </slot>
         content
-      </Content>,
-      handler,
+      </Content>
     )
+
+    innet(app, handler)
 
     expect(log).toBeCalledTimes(4)
     expect(log).toBeCalledWith('header')

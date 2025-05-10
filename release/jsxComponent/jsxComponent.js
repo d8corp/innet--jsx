@@ -10,13 +10,15 @@ function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'defau
 
 var innet__default = /*#__PURE__*/_interopDefaultLegacy(innet);
 
+const EMPTY_PROPS = Object.freeze({});
 function jsxComponent() {
     return () => {
         const app = innet.useApp();
         if (typeof app.type !== 'function')
             return innet.NEXT;
         const handler = innet.useHandler();
-        const result = app.type(app.props);
+        const run = 'dev' in app ? app.dev : app.type;
+        const result = run(app.props || EMPTY_PROPS);
         if (result &&
             typeof result === 'object' &&
             (Symbol.iterator in result || Symbol.asyncIterator in result) &&
@@ -29,4 +31,5 @@ function jsxComponent() {
     };
 }
 
+exports.EMPTY_PROPS = EMPTY_PROPS;
 exports.jsxComponent = jsxComponent;

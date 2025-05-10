@@ -6,6 +6,7 @@ import { type Context } from '../../utils'
 export interface ContextProps <D = any> {
   for: Context<D>
   set?: D
+  children: any
 }
 
 export function createContextHandler <D> (handler: Handler, context: Context<D>, value: D): Handler {

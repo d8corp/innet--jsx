@@ -4,6 +4,14 @@ import innet, { createHandler, type HandlerPlugin } from 'innet'
 import { useChildren } from '../hooks'
 import { jsxPlugins } from '.'
 
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      test: any
+    }
+  }
+}
+
 describe('jsxPlugins', () => {
   test('example', () => {
     const log = jest.fn()
@@ -21,6 +29,6 @@ describe('jsxPlugins', () => {
     innet(<test>{null}</test>, handler)
 
     expect(log).toBeCalledTimes(1)
-    expect(log).toBeCalledWith([null])
+    expect(log).toBeCalledWith(null)
   })
 })
