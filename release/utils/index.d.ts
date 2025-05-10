@@ -2,3 +2,4 @@ export * from './Context';
 export * from './GenericComponent';
 export * from './renderJSX';
 export * from './renderJSXDev';
+export * from './createElement';

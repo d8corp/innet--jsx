@@ -1,11 +1,12 @@
 {
   "name": "@innet/jsx",
-  "version": "2.0.0-beta.2",
+  "version": "2.0.0-beta.3",
   "description": "XML-ish syntax with innet",
   "main": "index.js",
   "module": "index.es6.js",
   "jsnext:main": "index.es6.js",
   "types": "index.d.ts",
+  "type": "module",
   "scripts": {
     "build": "innetjs release",
     "test": "jest",

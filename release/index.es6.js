@@ -19,3 +19,4 @@ export { Context } from './utils/Context/Context.es6.js';
 export { GenericComponent } from './utils/GenericComponent/GenericComponent.es6.js';
 export { renderJSX } from './utils/renderJSX/renderJSX.es6.js';
 export { renderJSXDev } from './utils/renderJSXDev/renderJSXDev.es6.js';
+export { createElement } from './utils/createElement/createElement.es6.js';

@@ -1,1 +1,1 @@
-export declare function useProps<C extends object | undefined = any>(): C;
+export declare function useProps<C extends object = any>(): C;
