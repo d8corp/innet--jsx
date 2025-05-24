@@ -1,9 +1,11 @@
+import { type NEXT } from 'innet';
+import { type EMPTY } from '../../jsxComponent';
 import type { JSXElement } from '../../types';
 import type { ContextProps } from '../context';
 import { type SlotProps, type SlotsProps } from '.';
 declare global {
     namespace JSX {
-        type Element = ArrayElement | FunctionElement | JSXElement | boolean | null | number | (string & {}) | undefined | void;
+        type Element = ArrayElement | FunctionElement | JSXElement | boolean | null | number | string | undefined | typeof EMPTY | typeof NEXT | void;
         interface ArrayElement extends Array<Element> {
         }
         type FunctionElement = () => Element;

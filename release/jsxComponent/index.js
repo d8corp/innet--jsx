@@ -6,5 +6,6 @@ var jsxComponent = require('./jsxComponent.js');
 
 
 
+exports.EMPTY = jsxComponent.EMPTY;
 exports.EMPTY_PROPS = jsxComponent.EMPTY_PROPS;
 exports.jsxComponent = jsxComponent.jsxComponent;

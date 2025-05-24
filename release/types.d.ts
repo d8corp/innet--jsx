@@ -6,7 +6,7 @@ export interface JSXSource {
 }
 export interface JSXProdElement<T = any, P extends Props | void = Props> {
     type: T;
-    props: P;
+    props?: P;
 }
 export interface JSXDevElement<T = any, P extends Props | void = Props> extends JSXProdElement<T, P> {
     dev: T;

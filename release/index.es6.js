@@ -7,7 +7,7 @@ import './hooks/index.es6.js';
 import './utils/index.es6.js';
 export { jsx, jsxs } from './jsx-runtime.es6.js';
 export { jsxDEV } from './jsx-dev-runtime.es6.js';
-export { EMPTY_PROPS, jsxComponent } from './jsxComponent/jsxComponent.es6.js';
+export { EMPTY, EMPTY_PROPS, jsxComponent } from './jsxComponent/jsxComponent.es6.js';
 export { JSX_PLUGINS, jsxPlugins } from './jsxPlugins/jsxPlugins.es6.js';
 export { getSlots, slot, slots, useSlots } from './plugins/slots/slots.es6.js';
 export { slotsContext } from './plugins/slots/constants.es6.js';

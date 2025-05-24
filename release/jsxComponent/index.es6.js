@@ -1,1 +1,1 @@
-export { EMPTY_PROPS, jsxComponent } from './jsxComponent.es6.js';
+export { EMPTY, EMPTY_PROPS, jsxComponent } from './jsxComponent.es6.js';

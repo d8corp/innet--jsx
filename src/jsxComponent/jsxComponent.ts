@@ -7,6 +7,7 @@ export type JsxComponent <P extends Props = Props> = (props: P) => any
 export type JsxComponentElement <P extends Props = Props> = JSXElement<JsxComponent<P>, P>
 
 export const EMPTY_PROPS = Object.freeze({})
+export const EMPTY = Symbol('EMPTY')
 
 export function jsxComponent (): HandlerPlugin {
   return () => {
@@ -17,6 +18,14 @@ export function jsxComponent (): HandlerPlugin {
     const handler = useHandler()
     const run = 'dev' in app ? app.dev : app.type
     const result = run(app.props || EMPTY_PROPS)
+
+    if (result === NEXT) {
+      return NEXT
+    }
+
+    if (result === EMPTY) {
+      return
+    }
 
     if (
       result &&

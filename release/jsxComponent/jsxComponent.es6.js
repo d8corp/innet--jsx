@@ -3,6 +3,7 @@ import '../utils/index.es6.js';
 import { GenericComponent } from '../utils/GenericComponent/GenericComponent.es6.js';
 
 const EMPTY_PROPS = Object.freeze({});
+const EMPTY = Symbol('EMPTY');
 function jsxComponent() {
     return () => {
         const app = useApp();
@@ -11,6 +12,12 @@ function jsxComponent() {
         const handler = useHandler();
         const run = 'dev' in app ? app.dev : app.type;
         const result = run(app.props || EMPTY_PROPS);
+        if (result === NEXT) {
+            return NEXT;
+        }
+        if (result === EMPTY) {
+            return;
+        }
         if (result &&
             typeof result === 'object' &&
             (Symbol.iterator in result || Symbol.asyncIterator in result) &&
@@ -23,4 +30,4 @@ function jsxComponent() {
     };
 }
 
-export { EMPTY_PROPS, jsxComponent };
+export { EMPTY, EMPTY_PROPS, jsxComponent };

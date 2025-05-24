@@ -1,7 +1,7 @@
 import { arraySync, createConditionPlugin, nullish, object } from '@innet/utils'
-import { createHandler, useApp } from 'innet'
+import { createHandler, type NEXT, useApp } from 'innet'
 
-import { jsxComponent } from '../../jsxComponent'
+import { type EMPTY, jsxComponent } from '../../jsxComponent'
 import { jsxPlugins } from '../../jsxPlugins'
 import type { JSXElement } from '../../types'
 import type { ContextProps } from '../context'
@@ -16,8 +16,10 @@ declare global {
       | boolean
       | null
       | number
-      | (string & {})
+      | string
       | undefined
+      | typeof EMPTY
+      | typeof NEXT
       | void
 
     interface ArrayElement extends Array<Element> {}
