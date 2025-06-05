@@ -13,14 +13,20 @@ function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'defau
 var innet__default = /*#__PURE__*/_interopDefaultLegacy(innet);
 
 function ContextProvider(props) {
-    const handler = Object.create(innet.useHandler());
+    let handler = innet.useHandler();
     if (Array.isArray(props.for)) {
-        props.for.forEach((context, index) => {
-            context.set(handler, (props.set)[index]);
-        });
+        if (props.for.some((context, index) => context.get(handler) !== props.set[index])) {
+            handler = Object.create(handler);
+            props.for.forEach((context, index) => {
+                context.set(handler, (props.set)[index]);
+            });
+        }
     }
     else if (props.for instanceof Context.Context) {
-        props.for.set(handler, props.set);
+        if (props.for.get(handler) !== props.set) {
+            handler = Object.create(handler);
+            props.for.set(handler, props.set);
+        }
     }
     innet__default["default"](props.children, handler);
     return jsxComponent.EMPTY;

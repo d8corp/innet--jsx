@@ -14,14 +14,20 @@ export interface ContextProviderProps <C extends Context | ReadonlyArray<Context
 }
 
 export function ContextProvider <C extends Context | ReadonlyArray<Context>> (props: ContextProviderProps<C>): any {
-  const handler = Object.create(useHandler())
+  let handler = useHandler()
 
   if (Array.isArray(props.for)) {
-    props.for.forEach((context, index) => {
-      context.set(handler, (props.set)[index])
-    })
+    if (props.for.some((context, index) => context.get(handler) !== props.set[index])) {
+      handler = Object.create(handler)
+      props.for.forEach((context, index) => {
+        context.set(handler, (props.set)[index])
+      })
+    }
   } else if (props.for instanceof Context) {
-    props.for.set(handler, props.set)
+    if (props.for.get(handler) !== props.set) {
+      handler = Object.create(handler)
+      props.for.set(handler, props.set)
+    }
   }
 
   innet(props.children, handler)
