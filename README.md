@@ -176,32 +176,44 @@ innet({
 }, handler)
 ```
 
-## context
+## Context
 
-This package includes `context` JSX Plugin.
-`context` provides a context into children.
+Use `Context` to create a context variable.
+
+```typescript jsx
+import { Context } from '@innet/jsx'
+const color = new Context('blue')
+```
+
+Use `useContext` in a component to get current context value.
+
+```typescript jsx
+import { useContext, Context } from '@innet/jsx'
+
+const color = new Context('blue')
+
+function Content () {
+  const currentColor = useContext(color)
+  console.log(`color: ${currentColor}`)
+}
+```
+Use `ContextProvider` to provide values into children.
 
 ```typescript jsx
 import innet, { createHandler } from 'innet'
 import { object, nullish, arraySync } from '@innet/utils'
 import {
-  jsxPlugins,
   jsxComponent,
-  context,
   Context,
   useProps,
-  useContext
+  useContext,
+  ContextProvider
 } from '@innet/jsx'
 
 const handler = createHandler([
   nullish([]),
   arraySync,
-  object([
-    jsxComponent,
-    jsxPlugins({
-      context,
-    }),
-  ]),
+  object([jsxComponent]),
 ])
 
 const color = new Context('blue')
@@ -213,73 +225,15 @@ function Content () {
 
 innet((
   <>
-    <Content />
-    <context for={color} set='red'>
-      <Content />
-    </context>
+    <Content/>
+    <ContextProvider for={color} set='red'>
+      <Content/>
+    </ContextProvider>
   </>
 ), handler)
 
 //color: blue
 //color: red
-```
-
-## slots
-
-This package includes `slots` and `slot` JSX Plugins.
-
-```typescript jsx
-import innet, { createHandler } from 'innet'
-import { object, nullish, arraySync } from '@innet/utils'
-import {
-  jsxPlugins,
-  jsxComponent,
-  slots,
-  slot,
-  useProps
-} from '@innet/jsx'
-
-const handler = createHandler([
-  nullish([]),
-  arraySync,
-  object([
-    jsxComponent,
-    jsxPlugins({
-      slots,
-      slot,
-    }),
-  ]),
-  () => () => {
-    console.log(useApp())
-  }
-])
-
-const Content = (props: any) => (
-  <slots from={props.children}>
-    <slot name='header' />
-    <slot />
-    <slot name='footer' />
-  </slots>
-)
-
-innet(
-  <Content>
-    <slot name='footer'>
-      footer
-    </slot>
-    custom
-    <slot name='header'>
-      header
-    </slot>
-    content
-  </Content>,
-  handler,
-)
-
-// header
-// custom
-// content
-// footer
 ```
 
 ## Issues
