@@ -31,10 +31,10 @@ function jsxComponent() {
             (Symbol.iterator in result || Symbol.asyncIterator in result) &&
             typeof result.next === 'function') {
             const data = result.next();
-            innet__default["default"](new GenericComponent.GenericComponent(data, result), handler);
+            innet__default["default"](new GenericComponent.GenericComponent(data, result), handler, 0, true);
             return;
         }
-        innet__default["default"](result, handler);
+        innet__default["default"](result, handler, 0, true);
     };
 }
 

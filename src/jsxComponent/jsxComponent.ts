@@ -35,10 +35,10 @@ export function jsxComponent (): HandlerPlugin {
     ) {
       const data = result.next()
 
-      innet(new GenericComponent(data, result), handler)
+      innet(new GenericComponent(data, result), handler, 0, true)
       return
     }
 
-    innet(result, handler)
+    innet(result, handler, 0, true)
   }
 }
