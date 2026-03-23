@@ -6,10 +6,6 @@ var innet = require('innet');
 require('../utils/index.js');
 var GenericComponent = require('../utils/GenericComponent/GenericComponent.js');
 
-function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
-
-var innet__default = /*#__PURE__*/_interopDefaultLegacy(innet);
-
 const EMPTY_PROPS = Object.freeze({});
 const EMPTY = Symbol('EMPTY');
 function jsxComponent() {
@@ -31,10 +27,10 @@ function jsxComponent() {
             (Symbol.iterator in result || Symbol.asyncIterator in result) &&
             typeof result.next === 'function') {
             const data = result.next();
-            innet__default["default"](new GenericComponent.GenericComponent(data, result), handler, 0, true);
+            innet.innet(new GenericComponent.GenericComponent(data, result), handler, 0, true);
             return;
         }
-        innet__default["default"](result, handler, 0, true);
+        innet.innet(result, handler, 0, true);
     };
 }
 

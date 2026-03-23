@@ -1,4 +1,4 @@
-import innet, { type HandlerPlugin, NEXT, useApp, useHandler } from 'innet'
+import { type HandlerPlugin, innet, NEXT, useApp, useHandler } from 'innet'
 
 import { type JSXElement, type Props } from '../types'
 import { GenericComponent } from '../utils'

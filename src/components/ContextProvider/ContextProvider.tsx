@@ -1,4 +1,4 @@
-import innet, { useHandler } from 'innet'
+import { innet, useHandler } from 'innet'
 
 import { EMPTY } from '../../jsxComponent'
 import { Context } from '../../utils'

@@ -1,4 +1,4 @@
-import innet from 'innet'
+import { innet } from 'innet'
 
 import { useContext } from '../../hooks'
 import { Context } from '../../utils'

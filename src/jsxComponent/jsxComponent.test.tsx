@@ -1,5 +1,5 @@
 import { array, arraySync, nullish, object } from '@innet/utils'
-import innet, { createHandler } from 'innet'
+import { createHandler, innet } from 'innet'
 
 import { jsxComponent } from '.'
 

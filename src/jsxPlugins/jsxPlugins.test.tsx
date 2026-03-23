@@ -1,5 +1,5 @@
 import { nullish, object } from '@innet/utils'
-import innet, { createHandler, type HandlerPlugin } from 'innet'
+import { createHandler, type HandlerPlugin, innet } from 'innet'
 
 import { useChildren } from '../hooks'
 import { jsxPlugins } from '.'

@@ -1,5 +1,11 @@
 # Changelog
 
+## v2.1
+
+### v2.1.0 [![23.03.2026](https://img.shields.io/date/1774264422)](https://github.com/d8corp/watch-state/tree/v2.1.0)
+
+- Used `innet@2.1`
+
 ## v2.0
 
 ### v2.0.0 [![23.03.2026](https://img.shields.io/date/1774261612)](https://github.com/d8corp/watch-state/tree/v2.0.0)

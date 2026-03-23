@@ -1,4 +1,4 @@
-import innet, { useApp, NEXT, useHandler } from 'innet';
+import { useApp, NEXT, useHandler, innet } from 'innet';
 import '../utils/index.es6.js';
 import { GenericComponent } from '../utils/GenericComponent/GenericComponent.es6.js';
 

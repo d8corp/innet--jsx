@@ -1,6 +1,6 @@
 {
   "name": "@innet/jsx",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "XML-ish syntax with innet",
   "main": "index.js",
   "module": "index.es6.js",
@@ -32,7 +32,7 @@
   },
   "homepage": "https://github.com/d8corp/innet--jsx",
   "dependencies": {
-    "innet": "^2.0.1"
+    "innet": "^2.1.0"
   },
   "devDependencies": {
     "@innet/utils": "^2.0.0-alpha.1",

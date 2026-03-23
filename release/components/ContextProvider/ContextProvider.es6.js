@@ -1,4 +1,4 @@
-import innet, { useHandler } from 'innet';
+import { useHandler, innet } from 'innet';
 import '../../jsxComponent/index.es6.js';
 import '../../utils/index.es6.js';
 import { Context } from '../../utils/Context/Context.es6.js';
