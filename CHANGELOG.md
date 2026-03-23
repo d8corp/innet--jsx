@@ -1,5 +1,12 @@
 # Changelog
 
+## v2.0
+
+### v2.0.0 [![23.03.2026](https://img.shields.io/date/1774261612)](https://github.com/d8corp/watch-state/tree/v2.0.0)
+
+- Used `innet@2`
+- Add `react-jsx` and `react-jsxdev` parsing support
+
 ## v1.2
 
 ### v1.2.1 [![04.02.2023](https://img.shields.io/date/1675515185)](https://github.com/d8corp/watch-state/tree/v1.2.1)

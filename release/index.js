@@ -2,7 +2,6 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-require('./_virtual/_rollup-plugin-process-env.js');
 require('./jsxComponent/index.js');
 require('./jsxPlugins/index.js');
 require('./types.js');
