@@ -2,6 +2,10 @@
 
 ## v2.1
 
+### v2.1.1 [![23.03.2026](https://img.shields.io/date/1774294969)](https://github.com/d8corp/watch-state/tree/v2.1.1)
+
+- Remove `jsx-runtime`
+
 ### v2.1.0 [![23.03.2026](https://img.shields.io/date/1774264422)](https://github.com/d8corp/watch-state/tree/v2.1.0)
 
 - Used `innet@2.1`

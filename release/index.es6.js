@@ -4,8 +4,6 @@ import './types.es6.js';
 import './components/index.es6.js';
 import './hooks/index.es6.js';
 import './utils/index.es6.js';
-export { jsx, jsxs } from './jsx-runtime.es6.js';
-export { jsxDEV } from './jsx-dev-runtime.es6.js';
 export { EMPTY, EMPTY_PROPS, jsxComponent } from './jsxComponent/jsxComponent.es6.js';
 export { JSX_PLUGINS, jsxPlugins } from './jsxPlugins/jsxPlugins.es6.js';
 export { ContextProvider } from './components/ContextProvider/ContextProvider.es6.js';

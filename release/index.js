@@ -8,8 +8,6 @@ require('./types.js');
 require('./components/index.js');
 require('./hooks/index.js');
 require('./utils/index.js');
-var jsxRuntime = require('./jsx-runtime.js');
-var jsxDevRuntime = require('./jsx-dev-runtime.js');
 var jsxComponent = require('./jsxComponent/jsxComponent.js');
 var jsxPlugins = require('./jsxPlugins/jsxPlugins.js');
 var ContextProvider = require('./components/ContextProvider/ContextProvider.js');
@@ -24,9 +22,6 @@ var createElement = require('./utils/createElement/createElement.js');
 
 
 
-exports.jsx = jsxRuntime.jsx;
-exports.jsxs = jsxRuntime.jsxs;
-exports.jsxDEV = jsxDevRuntime.jsxDEV;
 exports.EMPTY = jsxComponent.EMPTY;
 exports.EMPTY_PROPS = jsxComponent.EMPTY_PROPS;
 exports.jsxComponent = jsxComponent.jsxComponent;
