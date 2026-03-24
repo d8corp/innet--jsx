@@ -10,7 +10,7 @@ function getAppName (app: any) {
 
 function getStack (app: any, stack = ''): string {
   if (typeof app === 'object' && app !== null && app.source) {
-    return `${stack}\n    at ${getAppName(app.type)} (${app.source.fileName}:${app.source.lineNumber}:${app.source.columnNumber})${getStack(app.parent)}`
+    return `${stack}\n    at <${getAppName(app.type)}> (${app.source.fileName}:${app.source.lineNumber}:${app.source.columnNumber})${getStack(app.parent)}`
   }
 
   return stack
@@ -41,7 +41,7 @@ export function renderJSXDev (
         } catch (err: any) {
           const stack = getStack(app)
 
-          const error = Error(`Render component <${getAppName(type)}> exception${stack}`, { cause: err })
+          const error = Error(`Exception in <${getAppName(type)}>${stack}`, { cause: err })
           throw enrichErrorStack(error)
         }
       }
@@ -52,7 +52,7 @@ export function renderJSXDev (
         } catch (err: any) {
           const stack = getStack(app)
 
-          const error = Error(`DEV Error: Render plugin <${getAppName(type)}> exception${stack}`, { cause: err })
+          const error = Error(`Exception in <${getAppName(type)}>${stack}`, { cause: err })
           throw enrichErrorStack(error)
         }
       }

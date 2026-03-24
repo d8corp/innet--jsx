@@ -9,7 +9,7 @@ function getAppName(app) {
 }
 function getStack(app, stack = '') {
     if (typeof app === 'object' && app !== null && app.source) {
-        return `${stack}\n    at ${getAppName(app.type)} (${app.source.fileName}:${app.source.lineNumber}:${app.source.columnNumber})${getStack(app.parent)}`;
+        return `${stack}\n    at <${getAppName(app.type)}> (${app.source.fileName}:${app.source.lineNumber}:${app.source.columnNumber})${getStack(app.parent)}`;
     }
     return stack;
 }
@@ -28,7 +28,7 @@ function renderJSXDev(type, props, key, isStatic, source, self) {
             }
             catch (err) {
                 const stack = getStack(app);
-                const error = Error(`Render component <${getAppName(type)}> exception${stack}`, { cause: err });
+                const error = Error(`Exception in <${getAppName(type)}>${stack}`, { cause: err });
                 throw enrichErrorStack(error);
             }
         }
@@ -39,7 +39,7 @@ function renderJSXDev(type, props, key, isStatic, source, self) {
             }
             catch (err) {
                 const stack = getStack(app);
-                const error = Error(`DEV Error: Render plugin <${getAppName(type)}> exception${stack}`, { cause: err });
+                const error = Error(`Exception in <${getAppName(type)}>${stack}`, { cause: err });
                 throw enrichErrorStack(error);
             }
         };
