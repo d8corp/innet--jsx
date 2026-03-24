@@ -4,6 +4,8 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 var innet = require('innet');
 require('../../jsxPlugins/index.js');
+require('../enrichErrorStack/index.js');
+var enrichErrorStack = require('../enrichErrorStack/enrichErrorStack.js');
 var jsxPlugins = require('../../jsxPlugins/jsxPlugins.js');
 
 function getAppName(app) {
@@ -30,9 +32,8 @@ function renderJSXDev(type, props, key, isStatic, source, self) {
             }
             catch (err) {
                 const stack = getStack(app);
-                const error = Error(`DEV Error: Render component <${getAppName(type)}> error${stack}`, { cause: err });
-                error.stack = err.stack;
-                throw error;
+                const error = Error(`Render component <${getAppName(type)}> exception${stack}`, { cause: err });
+                throw enrichErrorStack.enrichErrorStack(error);
             }
         }
         : () => {
@@ -42,9 +43,8 @@ function renderJSXDev(type, props, key, isStatic, source, self) {
             }
             catch (err) {
                 const stack = getStack(app);
-                const error = Error(`DEV Error: Render plugin <${getAppName(type)}> error${stack}`, { cause: err });
-                error.stack = err.stack;
-                throw error;
+                const error = Error(`DEV Error: Render plugin <${getAppName(type)}> exception${stack}`, { cause: err });
+                throw enrichErrorStack.enrichErrorStack(error);
             }
         };
     const app = {

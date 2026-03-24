@@ -19,6 +19,7 @@ var GenericComponent = require('./utils/GenericComponent/GenericComponent.js');
 var renderJSX = require('./utils/renderJSX/renderJSX.js');
 var renderJSXDev = require('./utils/renderJSXDev/renderJSXDev.js');
 var createElement = require('./utils/createElement/createElement.js');
+var enrichErrorStack = require('./utils/enrichErrorStack/enrichErrorStack.js');
 
 
 
@@ -36,3 +37,4 @@ exports.GenericComponent = GenericComponent.GenericComponent;
 exports.renderJSX = renderJSX.renderJSX;
 exports.renderJSXDev = renderJSXDev.renderJSXDev;
 exports.createElement = createElement.createElement;
+exports.enrichErrorStack = enrichErrorStack.enrichErrorStack;

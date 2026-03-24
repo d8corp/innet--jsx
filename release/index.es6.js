@@ -15,3 +15,4 @@ export { GenericComponent } from './utils/GenericComponent/GenericComponent.es6.
 export { renderJSX } from './utils/renderJSX/renderJSX.es6.js';
 export { renderJSXDev } from './utils/renderJSXDev/renderJSXDev.es6.js';
 export { createElement } from './utils/createElement/createElement.es6.js';
+export { enrichErrorStack } from './utils/enrichErrorStack/enrichErrorStack.es6.js';

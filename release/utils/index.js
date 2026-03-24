@@ -5,4 +5,5 @@ require('./GenericComponent/index.js');
 require('./renderJSX/index.js');
 require('./renderJSXDev/index.js');
 require('./createElement/index.js');
+require('./enrichErrorStack/index.js');
 

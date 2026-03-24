@@ -1,5 +1,7 @@
 import { useApp, useHandler, NEXT } from 'innet';
 import '../../jsxPlugins/index.es6.js';
+import '../enrichErrorStack/index.es6.js';
+import { enrichErrorStack } from '../enrichErrorStack/enrichErrorStack.es6.js';
 import { JSX_PLUGINS } from '../../jsxPlugins/jsxPlugins.es6.js';
 
 function getAppName(app) {
@@ -26,9 +28,8 @@ function renderJSXDev(type, props, key, isStatic, source, self) {
             }
             catch (err) {
                 const stack = getStack(app);
-                const error = Error(`DEV Error: Render component <${getAppName(type)}> error${stack}`, { cause: err });
-                error.stack = err.stack;
-                throw error;
+                const error = Error(`Render component <${getAppName(type)}> exception${stack}`, { cause: err });
+                throw enrichErrorStack(error);
             }
         }
         : () => {
@@ -38,9 +39,8 @@ function renderJSXDev(type, props, key, isStatic, source, self) {
             }
             catch (err) {
                 const stack = getStack(app);
-                const error = Error(`DEV Error: Render plugin <${getAppName(type)}> error${stack}`, { cause: err });
-                error.stack = err.stack;
-                throw error;
+                const error = Error(`DEV Error: Render plugin <${getAppName(type)}> exception${stack}`, { cause: err });
+                throw enrichErrorStack(error);
             }
         };
     const app = {

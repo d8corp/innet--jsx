@@ -3,3 +3,4 @@ export * from './GenericComponent';
 export * from './renderJSX';
 export * from './renderJSXDev';
 export * from './createElement';
+export * from './enrichErrorStack';

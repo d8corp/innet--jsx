@@ -2,6 +2,10 @@
 
 ## v2.1
 
+### v2.1.2 [![24.03.2026](https://img.shields.io/date/1774340776)](https://github.com/d8corp/watch-state/tree/v2.1.2)
+
+- Improve exception terminal output in `renderJSXDev`
+
 ### v2.1.1 [![23.03.2026](https://img.shields.io/date/1774294969)](https://github.com/d8corp/watch-state/tree/v2.1.1)
 
 - Remove `jsx-runtime`

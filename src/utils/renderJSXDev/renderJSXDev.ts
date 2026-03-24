@@ -2,6 +2,7 @@ import { NEXT, useApp, useHandler } from 'innet'
 
 import { JSX_PLUGINS } from '../../jsxPlugins'
 import { type JSXElement, type JSXSource, type Props } from '../../types'
+import { enrichErrorStack } from '../enrichErrorStack'
 
 function getAppName (app: any) {
   return typeof app === 'function' ? app.name : String(app)
@@ -40,9 +41,8 @@ export function renderJSXDev (
         } catch (err: any) {
           const stack = getStack(app)
 
-          const error = Error(`DEV Error: Render component <${getAppName(type)}> error${stack}`, { cause: err })
-          error.stack = err.stack
-          throw error
+          const error = Error(`Render component <${getAppName(type)}> exception${stack}`, { cause: err })
+          throw enrichErrorStack(error)
         }
       }
     : () => {
@@ -52,9 +52,8 @@ export function renderJSXDev (
         } catch (err: any) {
           const stack = getStack(app)
 
-          const error = Error(`DEV Error: Render plugin <${getAppName(type)}> error${stack}`, { cause: err })
-          error.stack = err.stack
-          throw error
+          const error = Error(`DEV Error: Render plugin <${getAppName(type)}> exception${stack}`, { cause: err })
+          throw enrichErrorStack(error)
         }
       }
 
